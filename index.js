@@ -1,9 +1,8 @@
 
-
-// const questions = [ "What is your Github username?", "What is your favorite color?"  
-// ];
+const generateHTML = require("./generateHTML");
 const axios = require("axios");
 var inquirer = require('inquirer');
+const fs = require('fs')
 
 inquirer
     .prompt([
@@ -43,9 +42,9 @@ function gatherData(answers) {
         //  console.log(res.data.public_repos);
         //  console.log(res.data.followers);
         //  console.log(res.data.following);
-         
 
-         var userdetails = {
+
+        var userdetails = {
             name: res.data.name,
             location: res.data.location,
             bio: res.data.bio,
@@ -56,11 +55,15 @@ function gatherData(answers) {
             public_repos: res.data.public_repos,
             followers: res.data.followers,
             following: res.data.following,
+            color: answers.color,
         }
-console.log(userdetails);
+        console.log(userdetails);
+        const stringhtml = generateHTML(userdetails);
+        writeToFile(stringhtml);
     });
 
 }
+
 
 //Data Needed
 //data.name
@@ -74,10 +77,17 @@ console.log(userdetails);
 //data.following
 
 
-function writeToFile(fileName, data) {
+function writeToFile(stringhtml) {
+    fs.writeFile('profile.html', stringhtml, (err) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        //file written successfully
+    })
 
-}
-
+ }
+// writeToFile(userdetails);
 // function init() {
 
 // init();
