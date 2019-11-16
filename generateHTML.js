@@ -202,7 +202,7 @@ function generateHTML(data) {
             <div class="row">
                 <div class="card" id="card3">
                     <h2>Github Stars:</h2>
-                    <h3>5</h3>
+                    <h3>3</h3>
                 </div>
                 <div class="card" id="card4">
                     <h2>Following:</h2>
@@ -212,9 +212,8 @@ function generateHTML(data) {
         </div>
     </div>
 
-    <script src="index.js"></script>
 </body>
-        
+ </html>       
         `
 
 }

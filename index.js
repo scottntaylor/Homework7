@@ -1,4 +1,5 @@
 
+const puppeteer = require('puppeteer');
 const generateHTML = require("./generateHTML");
 const axios = require("axios");
 var inquirer = require('inquirer');
@@ -57,9 +58,11 @@ function gatherData(answers) {
             following: res.data.following,
             color: answers.color,
         }
-        console.log(userdetails);
+        // console.log(userdetails);
         const stringhtml = generateHTML(userdetails);
         writeToFile(stringhtml);
+        writeToPDF(stringhtml);
+
     });
 
 }
@@ -86,13 +89,27 @@ function writeToFile(stringhtml) {
         //file written successfully
     })
 
- }
+        
+}
+async function writeToPDF(stringhtml) {
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage()
+
+        await page.setContent(stringhtml);
+        await page.emulateMedia('screen');
+        await page.pdf({
+            path: 'profile.pdf',
+            format: 'A4',
+            printBackground: true
+
+        })
+    } catch  {
+    }
+}
 // writeToFile(userdetails);
 // function init() {
 
 // init();
 
 
-// Github Username
-//Favorite color (4 specific)
-//choose one and says searching...
