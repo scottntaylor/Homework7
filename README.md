@@ -1,1 +1,3 @@
 # Homework7
+
+This application generates a PDF document for a users Github profile, from command line prompts.  The application begins by asking the user for their Github profile name along with their favorite color.  Both questions are prompted through the npm Inquirer.  After collecting both answers, the Github username is passed into the Github API to return an object.  A separate object is then created with the necessary data for the PDF document.  It is from the newly created object that the data is implemented through jQuery to an HTML string and converted to a PDF file with Puppeteer.
